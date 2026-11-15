@@ -1,190 +1,129 @@
-# Космічна зміна: Форпост
+# 🚀 Space Shift: Outpost
 
-Браузерна гра для **NASA Space Apps Challenge Kyiv 2026** (виклик *Junior
-Astronaut Mission Trainer*). Гравець — астронавт-планувальник: щоранку
-Земля (ЦУП) дає завдання на день, гравець складає розклад, запускає
-симуляцію і бачить наслідки своїх рішень у вигляді коміксу, міні-ігор і
-короткого пояснення «рішення → наслідок → науковий принцип».
+### Explore Space. Make Decisions. Discover Science.
 
-Гра — **один файл `index.html`** (vanilla JavaScript, без збірки й без
-бекенду) плюс набір автономних міні-ігор у `minigames/`. Інтернет потрібен
-лише для шрифтів з Google Fonts; без нього гра теж працює, просто з
-системним шрифтом.
+**An interactive educational browser game for children aged 7–12, developed by Team Space Goblins for NASA Space Apps Challenge Kyiv 2026.**
 
-## Як відкрити гру (без встановлення нічого)
+Space Shift: Outpost puts players in charge of planning astronaut activities, managing limited resources, and solving challenges inspired by real space exploration.
 
-**Найпростіше — GitHub Pages**, якщо для репозиторію увімкнено публікацію
-(Settings → Pages → Deploy from a branch → `main` → `/ (root)`):
-гра відкривається просто за посиланням `https://<акаунт>.github.io/<репозиторій>/`,
-без завантажень і акаунтів — саме так, як вимагає челендж.
+Our goal is simple: **turn scientific knowledge into an experience where every decision matters.**
 
-⚠️ Поки репозиторій **приватний**, GitHub Pages для нього безкоштовно не
-працює (безкоштовний Pages — лише для публічних репозиторіїв, або для
-приватних на платних тарифах GitHub Pro/Team). Якщо хочете посилання для
-суддів — зробіть репозиторій публічним (Settings → General → Danger Zone →
-Change visibility) і увімкніть Pages, як описано вище.
+## 🎮 Play the Game
 
-**Локально:** просто подвійний клік на `index.html` здебільшого працює, але
-міні-ігри (вони відкриваються в `<iframe>`) і коректна кодова сторінка
-надійніше працюють через локальний сервер:
+**[🚀 Launch Space Shift: Outpost](https://steelalch3m1st-oss.github.io/space_goblins/)**
+
+Play directly in your browser. No installation, registration, or special equipment required.
+
+Available in **English and Ukrainian**.
+
+## 🪐 Three Missions. Three Scientific Challenges.
+
+### 🛰️ International Space Station
+**Risk Assessment and Responsible Planning**
+
+Plan scientific activities aboard the ISS while managing a simplified radiation exposure budget.
+
+Learn why astronaut safety and scientific productivity must be carefully balanced.
+
+### 🌕 Apollo 11
+**Time Management and Limited Resources**
+
+Organize lunar surface activities while considering task order, spacesuit resources, and departure deadlines.
+
+Learn how prioritization and efficient planning contribute to mission success.
+
+### 🔴 CHAPEA
+**Communication Delays and Autonomous Decisions**
+
+Experience a simulated Mars mission inspired by NASA's CHAPEA research program.
+
+Plan activities around a 40-minute round-trip communication delay and learn why astronauts on distant missions must make independent decisions.
+
+*CHAPEA is an Earth-based NASA research program. Our Mars scenario is an educational simulation.*
+
+Each mission includes **two playable days**, offering six days of interactive learning.
+
+## 🧩 How It Works
+
+**Briefing → Planning → Simulation → Scientific Explanation**
+
+1. **Receive your mission:** Learn about the day's objectives and challenges from Mission Control.
+2. **Create a plan:** Schedule astronaut activities while considering time, resources, and mission constraints.
+3. **Run the simulation:** Watch your decisions unfold through pixel-art scenes, comics, and interactive mini-games.
+4. **Discover the science:** Understand how your decisions affected the outcome and which scientific principles explain the results.
+
+Mistakes are part of the learning process. Players can revise unsuccessful plans and try again.
+
+## 🔬 Powered by NASA Science
+
+The game draws on publicly available NASA scientific and educational resources, including:
+
+- [NASA International Space Station](https://www.nasa.gov/international-space-station/)
+- [NASA Apollo 11](https://www.nasa.gov/mission/apollo-11/)
+- [Apollo Lunar Surface Journal](https://www.nasa.gov/history/alsj/)
+- [NASA CHAPEA](https://www.nasa.gov/humans-in-space/chapea/)
+- [NASA Science](https://science.nasa.gov/)
+- [NASA DONKI](https://ccmc.gsfc.nasa.gov/tools/DONKI/)
+
+Scientific concepts are adapted for younger audiences. Resource values, radiation budgets, and selected mission parameters are simplified educational models, not actual NASA measurements or exact historical mission conditions.
+
+For more information, see [NASA Data Sources](docs/DATA_SOURCES.md).
+
+## 🎨 Features
+
+- Monochrome pixel-art visuals and animated mission scenes.
+- Interactive scheduling and resource management.
+- Mini-games integrated into mission activities.
+- Achievements and browser-based progress tracking.
+- Mission Control audio messages.
+- English and Ukrainian localization.
+- Educational feedback connecting decisions with scientific principles.
+
+## 💻 Technology
+
+**HTML5 · CSS3 · Vanilla JavaScript · GitHub Pages**
+
+The main game runs from a single `index.html` file, with standalone mini-games stored in the `minigames/` directory.
+
+The project requires no backend, database, or build process.
+
+## 🛠️ Run Locally
+
+Clone the repository:
 
 ```bash
-# будь-яка ОС, якщо є Python 3
-python3 -m http.server 8000
-# або, якщо є Node.js
-npx serve .
+git clone https://github.com/steelalch3m1st-oss/space_goblins.git
+cd space_goblins
 ```
 
-Windows без Python/Node — є готовий скрипт (PowerShell, без залежностей):
+Start a local HTTP server:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open **http://localhost:8000/** in your browser.
+
+On Windows, you can also use:
 
 ```powershell
 powershell -File tools/serve.ps1 -Port 8000
 ```
 
-Відкрити в браузері: **http://localhost:8000/**
+A local HTTP server is recommended for reliable mini-game functionality.
 
-## Поточний стан гри
+## 👨‍🚀 Our Team
 
-Зараз показано **три місії по два дні, один гравець**: МКС «Будні
-станції», Apollo 11 (Місяць), CHAPEA (Марс). Повний рушій усередині
-підтримує 7 місій / 25 днів і кооперативний режим на кількох гравців — цей
-ширший набір лишається в коді (і на ньому побудована частина досягнень),
-але в інтерфейсі показано лише спрощений набір вище через фільтр
-`UI_MISSION`/`UI_DAYS` на початку `index.html`. Повернути решту місій в
-інтерфейс — питання прибрати/розширити цей фільтр, нічого видаляти не
-треба.
+**Space Goblins** | 4 Team Members
 
-### Три наукові принципи, які вчить гра
+**NASA Space Apps Challenge Kyiv 2026**
 
-1. **МКС — ризик і бюджет радіації.** Більше часу назовні чи біля великих
-   вікон Купола — вища ігрова доза. Перевищення запланованого бюджету не
-   валить день, але забирає досягнення «Обережне планування» (`radsafe`).
-   Прогноз дози видно під час планування.
-2. **Apollo 11 — обмежений ресурс і порядок дій.** Кисень скафандра й
-   фіксований час зльоту — зменшуваний ресурс; порядок завдань назовні
-   вирішує, встигне екіпаж повернутися.
-3. **CHAPEA — затримка зв'язку Земля-Марс.** Відповідь на запит фізично не
-   може прийти раніше реальної затримки сигналу (у грі — пауза щонайменше
-   40 хв на повний цикл запит-відповідь); дитина вчиться планувати
-   очікування, а не просто чекати.
+Challenge: *Junior Astronaut Mission Trainer*
 
-Повний ланцюжок «NASA-джерело → науковий принцип → ігрове правило → що
-засвоює дитина» — у `docs/DATA_SOURCES.md` (розділ 0) і `data/README.md`.
+---
 
-### Один ігровий день
+### 🌌 Our Mission
 
-1. **Головний екран** — вибір локації (МКС / Місяць / Марс), перемикач
-   підказок, одноразова вступна анімація місії (посадка / станція на
-   орбіті).
-2. **Брифінг** — коротка репліка ЦУП (мета дня, ускладнення за потреби), з
-   голосовим озвученням (`sound/bla1..5.wav`).
-3. **Планування** — перетягни іконку завдання на шкалу часу вгорі (або
-   клавішами ← → зміни порядок уже доданих); фільтр Усі / Головні / Побут /
-   Бонус; угорі чипи **Мета / Проблема / Вимоги / Навантаження** з
-   поясненням при наведенні; кнопки «Брифінг» (повторити) і «!» (цікавий
-   факт дня).
-4. **Симуляція** — план програється коміксом, кадр за кадром. Помилка в
-   порядку/часі чи фізично неможливе рішення → **«ПРОВАЛ»**, день
-   повторюється. На потрібних кадрах відкривається міні-гра.
-5. **Міні-ігри** — окремі HTML-файли з `minigames/`, завантажуються в
-   `<iframe>` і звітують результат через `postMessage`
-   (`forpost:minigame-complete`). Завжди є «Почати» / «Пропустити»; програш
-   у міні-грі не ламає основну гру («TRY AGAIN» відкрито).
-6. **Підсумок від ЦУП** — окреме вікно після дня: рішення гравця →
-   фактичний наслідок → науковий принцип, саме для цього проходження.
-7. **Підсумок місії** — коротко «Що ти зробив».
+We believe children understand science more deeply when they can experience its challenges, make their own decisions, and discover the consequences.
 
-### Ресурси
-
-Три ігрові шкали (0–100, умовні, не реальні одиниці):
-
-- **⚡ Енергія** — від сонячних панелей; досліди й прилади її витрачають.
-- **💧 Запаси життя** — повітря, вода, їжа разом.
-- **☢ Доза радіації** — накопичується назовні й під час бурь; це **ігровий
-  плановий бюджет, а не медична межа безпеки** (ніде в інтерфейсі він не
-  підписаний як реальна доза).
-
-### Мова та озвучення
-
-Перемикач UA / EN на головному екрані. Український інтерфейс вимикає
-вбудований англійський переклад міні-ігор; англійська розмітка міні-ігор
-перекладається шаром `minigames/mg-lang.js`. Репліки ЦУП озвучені
-записаними звуковими файлами (`sound/bla1..5.wav`) — без синтезу мовлення.
-
-### Дані NASA
-
-Усі факти гри мають джерело (кнопка «ДАНІ: NASA» і посилання в підвалі:
-NASA Space Station Blog, Apollo Lunar Surface Journal, NASA CHAPEA, Mars
-2020 Perseverance). Приклади: сонячний спалах X9.0 від 03.10.2024 (DONKI,
-поданий як окремий історичний факт, а не подія 1969 року), затримка
-сигналу Земля-Марс 4–24 хв (NASA Science). Ігрова шкала радіації — ЛИШЕ
-коефіцієнт балансу; спроба підʼєднати живі дані дози з OSDR RadLab API не
-вдалася під час розробки (HTTP 500) — деталі в `data/README.md`.
-
-### Збереження прогресу
-
-Досягнення, відкриті факти й базовий прогрес по місіях зберігаються в
-`localStorage` браузера й переживають перезавантаження сторінки. **Відомий
-ліміт:** позиція всередині поточної місії (на якому дні ви зупинились,
-чернетковий план) не зберігається — перезавантаження повертає на головний
-екран, місію треба починати з дня 1.
-
-## Структура репозиторію
-
-```
-index.html              — гра (відкривати цей файл); UI_MISSION/UI_DAYS
-                           вгорі файлу визначають, які 3 місії показано
-                           поверх повного рушія
-minigames/               — автономні HTML-міні-ігри, підключені через iframe
-  mg-lang.js               — шар перекладу розмітки міні-ігор (UA/EN)
-sound/                    — звукові репліки ЦУП (bla1..5.wav)
-tools/
-  serve.ps1                — локальний сервер без залежностей (Windows)
-  mg3/                      — джерела трьох міні-ігор (robotic-arm,
-                              suit-maintenance, lrrr) + `build.pl` (Perl),
-                              який збирає їх у готові файли в minigames/
-docs/                     — дизайн-документи команди (місії, досягнення,
-                              бали, аудит навчального геймплею, джерела NASA)
-data/README.md            — статус перевірки кожного факту NASA_DATA
-tests/                    — автоматичні перевірки рушія (Node.js, без
-                              npm-залежностей): passability, achievements,
-                              partial-pass, learning-rules
-CHANGES.md                 — хронологія правок візуальної версії
-.claude/launch.json        — конфігурація запуску гри для редактора (опційно)
-```
-
-### Автоматичні тести
-
-Запускаються напряму через Node.js, без `npm install`:
-
-```bash
-node tests/passability.test.js
-node tests/achievements.test.js
-node tests/partial-pass.test.js
-node tests/learning-rules.test.js
-```
-
-## Відомі обмеження
-
-- Позиція всередині місії не зберігається між перезавантаженнями сторінки.
-- Гра однокористувацька; кооперативний режим (передача ходу між гравцями)
-  лишається в рушії, але вимкнений в інтерфейсі спрощеної версії.
-- Частина з повного переліку досягнень прив'язана до 7 повних місій або
-  кількох гравців і тому недосяжна в поточних 3 місіях/2 днях — очікувано,
-  не помилка (деталі в `CHANGES.md`).
-- Через фіксовану паузу очікування (10 хв) частина комбінацій «день +
-  ускладнення» для НЕактивних місій (поза поточними трьома) більше не має
-  розв'язку в `tests/passability.test.js` — на самі три активні місії це
-  не впливає, усі їхні комбінації прохідні.
-- Міні-ігри з `minigames/` надійно працюють лише через `http://`, не через
-  відкриття файлу напряму (`file://`) — звідси й рекомендація локального
-  сервера вище.
-
-## Команда й подальша робота
-
-Проєкт пишуть 4 людини одночасно (зони відповідальності — core-логіка,
-дизайн, міні-ігри, бали й ресурси — описані в спільному командному файлі
-поза цим репозиторієм). Подальші кроки:
-збереження позиції в місії після перезавантаження, вичитка перекладених
-текстів міні-ігор, за бажання — локальне вендорення Google Fonts для
-повної офлайн-роботи на самому хакатоні.
+**Space Shift: Outpost transforms space exploration from something children learn about into something they learn through.**
