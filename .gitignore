@@ -2,3 +2,5 @@ node_modules/
 tests/_engine.generated.js
 .DS_Store
 *.log
+_before/
+tests/_engine*.generated.js

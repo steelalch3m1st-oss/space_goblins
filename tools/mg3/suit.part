@@ -1,0 +1,152 @@
+.tile{cursor:pointer}
+.tile .tb{fill:#000;stroke:#fff;stroke-width:2}
+.tile:hover .tb,.tile:focus .tb{fill:#161616}
+.tile.sel .tb{stroke:#35e0ff;stroke-width:4}
+.tile.done{cursor:default;opacity:.35}
+.tile:focus,.port:focus{outline:none}
+.port{cursor:pointer}
+.port .pb{fill:none;stroke:#666;stroke-width:2;stroke-dasharray:6 5}
+.port.hot .pb{stroke:#35e0ff;stroke-dasharray:none;animation:ph 1s steps(2,end) infinite}
+@keyframes ph{50%{stroke-width:4}}
+.port:hover .pb,.port:focus .pb{stroke:#fff}
+.port.done{cursor:default}.port.done .pb{stroke:#fff;stroke-dasharray:none;fill:#000}
+.snap{animation:snap .35s steps(5,end)}
+@keyframes snap{0%{transform:scale(1.5)}100%{transform:scale(1)}}
+.spark line{stroke:#35e0ff;stroke-width:3;animation:bst .5s steps(5,end) forwards}
+@keyframes bst{from{opacity:1}to{opacity:0}}
+.tile.shake .tb,.port.shake .pb{animation:shk .4s steps(4,end)}
+@keyframes shk{0%{stroke:#ff6a6a;stroke-width:4}50%{stroke:#ff6a6a;stroke-width:4;transform:translateX(5px)}100%{stroke:#ff6a6a}}
+@@BODY@@
+<main class="g">
+<h1 class="title">SUIT MAINTENANCE</h1>
+<p class="lead">MARS HABITAT · AFTER EVA</p>
+<div class="stage"><svg id="sv" viewBox="0 0 800 420" aria-label="Mars habitat maintenance bay with a spacesuit and a tool tray">
+<defs>
+ <pattern id="dth" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="2" height="2" fill="#444"/><rect x="2" y="2" width="2" height="2" fill="#444"/></pattern>
+ <pattern id="hat" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8L8 0" stroke="#333" stroke-width="2"/></pattern>
+ <g id="ic-visor"><path d="M-28 -4Q-28 -18 -10 -18H10Q28 -18 28 -4V6Q28 18 10 18H-10Q-28 18 -28 6Z" fill="none" stroke="currentColor" stroke-width="4"/><path d="M-18 -8H-4" stroke="currentColor" stroke-width="3"/><path d="M-20 8H20" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/></g>
+ <g id="ic-hose"><path d="M-26 14C-26 -16 -12 -16 -8 0S6 16 12 0S26 -16 26 14" fill="none" stroke="currentColor" stroke-width="5"/><rect x="-34" y="10" width="12" height="12" fill="currentColor"/><rect x="22" y="10" width="12" height="12" fill="currentColor"/></g>
+ <g id="ic-pack"><rect x="-20" y="-22" width="40" height="46" fill="none" stroke="currentColor" stroke-width="4"/><rect x="-8" y="-30" width="16" height="8" fill="currentColor"/><path d="M3 -14L-9 3H-1L-5 17L9 -2H1Z" fill="currentColor"/></g>
+</defs>
+<rect width="800" height="420" fill="#050505"/>
+<path d="M0 12H800M300 12V400M600 12V400" stroke="#1d1d1d" stroke-width="2"/>
+<rect x="0" y="404" width="800" height="16" fill="url(#hat)"/><path d="M0 404H800" stroke="#fff" stroke-width="2"/>
+<!-- Mars window -->
+<g><rect x="648" y="24" width="136" height="96" fill="#000" stroke="#fff" stroke-width="3"/>
+ <rect x="652" y="28" width="128" height="88" fill="url(#dth)" opacity=".5"/>
+ <circle cx="748" cy="52" r="8" fill="#fff"/>
+ <path d="M652 92Q690 78 720 88T780 84V116H652Z" fill="#888" stroke="#fff" stroke-width="2"/>
+ <path d="M652 104Q700 96 740 104T780 100V116H652Z" fill="#555"/>
+ <path d="M690 84l6-8 8 8z" fill="#444" stroke="#fff"/>
+ <path d="M716 24V120" stroke="#fff" stroke-width="2"/></g>
+<text x="716" y="138" text-anchor="middle" font-size="8" fill="#9a9a9a">MARS</text>
+<!-- tool tray -->
+<rect x="16" y="16" width="244" height="388" fill="#0a0a0a" stroke="#fff" stroke-width="2"/>
+<text x="138" y="40" text-anchor="middle" font-size="9" fill="#9a9a9a">TOOL TRAY</text>
+<g id="tiles"></g>
+<!-- suit -->
+<g id="suit" stroke="#fff" stroke-width="3" fill="#0e0e0e">
+ <path d="M400 146L366 282" stroke-width="38" stroke="#fff" fill="none"/><path d="M400 146L366 282" stroke-width="32" stroke="#0e0e0e" fill="none"/>
+ <path d="M560 146L594 282" stroke-width="38" stroke="#fff" fill="none"/><path d="M560 146L594 282" stroke-width="32" stroke="#0e0e0e" fill="none"/>
+ <circle cx="364" cy="292" r="16"/><circle cx="596" cy="292" r="16"/>
+ <rect x="420" y="296" width="52" height="108" rx="6"/><rect x="488" y="296" width="52" height="108" rx="6"/>
+ <rect x="414" y="394" width="64" height="10" fill="#fff"/><rect x="482" y="394" width="64" height="10" fill="#fff"/>
+ <rect x="400" y="132" width="160" height="172" rx="14"/>
+ <path d="M400 276H560" stroke="#555"/><rect x="400" y="132" width="160" height="172" rx="14" fill="url(#hat)" stroke="none"/>
+ <circle cx="480" cy="84" r="54"/><circle cx="480" cy="84" r="46" fill="none" stroke="#555"/>
+</g>
+<g id="ports"></g>
+<g id="insts"></g>
+<g id="ckl"><text x="650" y="186" font-size="8" fill="#9a9a9a">CHECKLIST</text></g>
+<g id="fx"></g>
+</svg></div>
+<div class="hud"><div class="steps"><i id="c0">VISOR</i><i id="c1">OXYGEN</i><i id="c2">POWER</i></div><div class="msg" id="msg">Select a component from the tool tray.</div></div>
+<div class="ctl"><div class="hint">1. CLICK A PART · 2. CLICK THE MATCHING PORT</div><div class="acts"><button class="b" id="skip">SKIP</button></div></div>
+</main>
+<section class="ov" id="intro"><div class="card">
+ <div class="eyebrow">HOW TO PLAY</div>
+ <h2>SERVICE THE EVA SUIT</h2>
+ <p>Select a component, then install it into the matching outlined port. Repair the visor, oxygen line, and life-support pack before the next Mars EVA.</p>
+ <div class="how"><div><b>01</b>CLICK A PART IN THE <span class="cyt">TOOL TRAY</span></div><div><b>02</b>FIND THE PORT WITH THE SAME PICTURE</div><div><b>03</b>INSTALL ALL <span class="cyt">3 PARTS</span></div></div>
+ <button class="b cy" id="start">START MAINTENANCE →</button>
+</div></section>
+<section class="ov" id="end" hidden><div class="card">
+ <div class="eyebrow" id="eTag"></div><h2 id="eTitle"></h2><p id="eText"></p>
+ <div class="row"><button class="b" id="again">TRY AGAIN</button></div>
+</div></section>
+@@JS@@
+(function(){
+ var NS='http://www.w3.org/2000/svg', $=function(s){return document.querySelector(s);};
+ var PARTS=[
+  {id:'pack',ic:'ic-pack',n:['LIFE-SUPPORT','PACK'],ck:'LIFE-SUPPORT',port:{x:516,y:254,w:62,h:78}},
+  {id:'visor',ic:'ic-visor',n:['VISOR SEAL'],ck:'VISOR SEAL',port:{x:480,y:86,w:86,h:56}},
+  {id:'hose',ic:'ic-hose',n:['OXYGEN HOSE'],ck:'OXYGEN LINE',port:{x:440,y:184,w:84,h:60}}
+ ];
+ var sel=null, done={}, wrong=0, running=false, over=false, lastM='';
+ function msg(s,c){ var key=s+'|'+(c||''); if(key===lastM) return; lastM=key; var m=$('#msg'); m.textContent=s; m.className='msg'+(c?' '+c:''); }
+ function el(tag,att,par){ var e=document.createElementNS(NS,tag); for(var k in att) e.setAttribute(k,att[k]); if(par) par.appendChild(e); return e; }
+ function use(id,x,y,col,sc,par){ var u=el('use',{href:'#'+id,x:0,y:0,transform:'translate('+x+' '+y+') scale('+(sc||1)+')',style:'color:'+col},par); return u; }
+ function build(){
+  $('#tiles').innerHTML=''; $('#ports').innerHTML=''; $('#insts').innerHTML=''; $('#fx').innerHTML='';
+  var ck=$('#ckl'); ck.querySelectorAll('.cl').forEach(function(n){n.remove();});
+  PARTS.forEach(function(p,i){
+   var y=52+i*116, g=el('g',{'class':'tile',tabindex:0,role:'button','aria-label':p.ck,'data-id':p.id,transform:'translate(30 '+y+')'},$('#tiles'));
+   el('rect',{'class':'tb',x:0,y:0,width:216,height:104},g);
+   use(p.ic,52,52,'#fff',1.15,g);
+   p.n.forEach(function(s,k){ var t=el('text',{x:100,y:(p.n.length>1?44:56)+k*18,'font-size':9,fill:'#fff'},g); t.textContent=s; });
+   var tk=el('text',{x:108,y:92,'font-size':8,fill:'#35e0ff','class':'tk',visibility:'hidden'},g); tk.textContent='INSTALLED ✓';
+   g.addEventListener('click',function(){ pick(p.id); });
+   g.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(p.id); } });
+   var po=p.port, pg=el('g',{'class':'port',tabindex:0,role:'button','aria-label':'Port for '+p.ck,'data-id':p.id,transform:'translate('+po.x+' '+po.y+')'},$('#ports'));
+   el('rect',{'class':'pb',x:-po.w/2,y:-po.h/2,width:po.w,height:po.h,rx:6},pg);
+   use(p.ic,0,0,'#666',.85,pg).setAttribute('class','pico');
+   pg.addEventListener('click',function(){ place(p.id); });
+   pg.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); place(p.id); } });
+   var c=el('text',{'class':'cl',x:650,y:206+i*20,'font-size':8,fill:'#9a9a9a','data-id':p.id},ck); c.textContent='[ ] '+p.ck;
+   $('#c'+i).className='';
+  });
+  sel=null; done={}; wrong=0; over=false; lastM=''; msg('Select a component from the tool tray.');
+ }
+ function pick(id){
+  if(!running||done[id]) return; sel=(sel===id?null:id);
+  document.querySelectorAll('.tile').forEach(function(t){ t.classList.toggle('sel',t.getAttribute('data-id')===sel); });
+  document.querySelectorAll('.port').forEach(function(t){ t.classList.toggle('hot',!!sel&&!done[t.getAttribute('data-id')]); });
+  msg(sel?'Now click the matching port on the suit.':'Select a component from the tool tray.', sel?'good':'');
+ }
+ function place(portId){
+  if(!running||over) return;
+  if(!sel){ msg('Select a component from the tool tray first.'); return; }
+  if(done[portId]) return;
+  if(sel!==portId){
+   wrong++; var tile=document.querySelector('.tile[data-id="'+sel+'"]'); tile.classList.remove('shake'); void tile.getBoundingClientRect(); tile.classList.add('shake');
+   var pg=document.querySelector('.port[data-id="'+portId+'"]'); pg.classList.remove('shake'); void pg.getBoundingClientRect(); pg.classList.add('shake');
+   msg('THIS PORT DOES NOT MATCH THE PART','err'); sel=null;
+   document.querySelectorAll('.tile').forEach(function(t){ t.classList.remove('sel'); }); document.querySelectorAll('.port').forEach(function(t){ t.classList.remove('hot'); });
+   return;
+  }
+  var p=PARTS.filter(function(x){return x.id===sel;})[0], i=PARTS.indexOf(p); done[p.id]=true; sel=null;
+  var tile=document.querySelector('.tile[data-id="'+p.id+'"]'); tile.classList.remove('sel'); tile.classList.add('done'); tile.querySelector('.tk').setAttribute('visibility','visible');
+  var pg=document.querySelector('.port[data-id="'+p.id+'"]'); pg.classList.add('done'); pg.classList.remove('hot'); pg.querySelector('.pico').remove();
+  var ig=el('g',{transform:'translate('+p.port.x+' '+p.port.y+')'},$('#insts')); var inner=el('g',{'class':'snap',style:'transform-box:fill-box;transform-origin:center'},ig); use(p.ic,0,0,'#fff',.85,inner);
+  var sp='', fx=el('g',{'class':'spark',transform:'translate('+p.port.x+' '+p.port.y+')'},$('#fx'));
+  for(var k=0;k<8;k++){ var a=k*Math.PI/4, r1=Math.max(p.port.w,p.port.h)/2+4, r2=r1+14; el('line',{x1:Math.cos(a)*r1,y1:Math.sin(a)*r1,x2:Math.cos(a)*r2,y2:Math.sin(a)*r2},fx); }
+  setTimeout(function(){ fx.remove(); },600);
+  document.querySelectorAll('.port').forEach(function(t){ t.classList.remove('hot'); });
+  $('#c'+i).className='ok'; var cl=document.querySelector('.cl[data-id="'+p.id+'"]'); cl.textContent='[✓] '+p.ck; cl.setAttribute('fill','#fff');
+  var n=Object.keys(done).length;
+  if(n<3){ msg('INSTALLED — '+n+' OF 3 CHECKS DONE','good'); return; }
+  msg('SUIT READY FOR EVA','good'); running=false; over=true;
+  var perfect=wrong===0;
+  setTimeout(function(){
+   $('#eTag').textContent=perfect?'ALL CHECKS PASSED · PERFECT':'ALL CHECKS PASSED'; $('#eTitle').innerHTML='SUIT READY<br>FOR EVA';
+   $('#eText').textContent=perfect?'All three parts installed without a wrong placement.':'All three parts installed. +40 points.';
+   window.MG3.report(true,perfect,false); $('#end').hidden=false; $('#again').focus();
+  },800);
+ }
+ function skip(){ if(over) return; running=false; over=true; $('#eTag').textContent='MINI-GAME SKIPPED'; $('#eTitle').innerHTML='CONTINUE<br>MISSION'; $('#eText').textContent='The mission continues without a bonus.'; $('#end').hidden=false; $('#again').focus(); window.MG3.report(false,false,true); }
+ $('#skip').onclick=skip;
+ window.addEventListener('keydown',function(e){ if(e.key==='Escape'){ e.preventDefault(); skip(); } });
+ $('#start').onclick=function(){ $('#intro').hidden=true; running=true; window.MG3.start(); };
+ $('#again').onclick=function(){ $('#end').hidden=true; build(); running=true; window.MG3.start(); };
+ build();
+})();

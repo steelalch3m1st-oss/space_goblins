@@ -1,0 +1,174 @@
+.cargo-lbl{font-size:8px;fill:#fff}
+.ringc{fill:none;stroke:#35e0ff;stroke-width:4;animation:rg 1.1s steps(2,end) infinite}
+@keyframes rg{50%{stroke-width:7;opacity:.6}}
+.ringc.ready{animation:none;stroke-width:7}
+.burst line{stroke:#35e0ff;stroke-width:3;animation:bst .7s steps(6,end) forwards}
+@keyframes bst{from{opacity:1;transform:scale(.3)}to{opacity:0;transform:scale(2.2)}}
+.burst{transform-box:fill-box;transform-origin:center}
+.cr.canGrab rect.crb{stroke:#35e0ff;stroke-width:4}
+@@BODY@@
+<main class="g">
+<h1 class="title">ROBOTIC ARM TRAINING</h1>
+<p class="lead">ISS · CANADARM2 SIMULATOR</p>
+<div class="stage"><svg id="sv" viewBox="0 0 800 420" aria-label="Exterior of the ISS with Canadarm2, a cargo crate and a docking ring">
+<defs>
+ <pattern id="dth" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="2" height="2" fill="#3a3a3a"/><rect x="2" y="2" width="2" height="2" fill="#3a3a3a"/></pattern>
+ <pattern id="hat" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8L8 0" stroke="#8a8a8a" stroke-width="2"/></pattern>
+ <pattern id="sol" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#000"/><rect x=".5" y=".5" width="9" height="9" fill="none" stroke="#777"/></pattern>
+ <clipPath id="earthclip"><circle cx="400" cy="650" r="390"/></clipPath>
+</defs>
+<!-- Earth -->
+<circle cx="400" cy="650" r="390" fill="#0a0a0a" stroke="#fff" stroke-width="2"/>
+<g clip-path="url(#earthclip)">
+ <circle cx="400" cy="650" r="390" fill="url(#dth)" opacity=".55"/>
+ <path d="M60 330Q130 300 210 322T330 318Q380 330 360 372T260 400Q190 380 120 395T40 370Z" fill="#555" stroke="#8a8a8a"/>
+ <path d="M470 300Q560 285 640 310T760 330Q790 360 730 380T600 392Q520 370 470 340Z" fill="#555" stroke="#8a8a8a"/>
+ <path d="M260 330H340M520 305H610M120 360H190M640 345H720" stroke="#fff" stroke-width="3" stroke-dasharray="14 10" opacity=".7"/>
+</g>
+<!-- ISS: solar arrays, truss, modules -->
+<g id="iss" stroke="#fff" stroke-width="2">
+ <rect x="40" y="100" width="70" height="230" fill="url(#sol)"/>
+ <rect x="130" y="130" width="70" height="200" fill="url(#sol)"/>
+ <rect x="20" y="328" width="760" height="24" fill="#000"/>
+ <path id="truss" fill="none" stroke="#9a9a9a"/>
+ <rect x="250" y="290" width="160" height="62" fill="#111"/>
+ <path d="M270 290V352M290 290V352M310 290V352M330 290V352M350 290V352M370 290V352M390 290V352" stroke="#555"/>
+ <rect x="620" y="300" width="140" height="52" fill="#111"/>
+ <path d="M640 300V352M665 300V352M715 300V352M740 300V352" stroke="#555"/>
+ <rect x="660" y="292" width="60" height="9" fill="#000"/>
+</g>
+<text x="330" y="318" text-anchor="middle" font-size="8" fill="#fff">CANADARM2</text>
+<text x="690" y="323" text-anchor="middle" font-size="8" fill="#fff">PORT</text>
+<!-- docking ring -->
+<g id="ringg">
+ <circle id="ring" class="ringc" cx="690" cy="268" r="36"/>
+ <circle cx="690" cy="268" r="26" fill="none" stroke="#35e0ff" stroke-width="1" stroke-dasharray="4 4"/>
+ <text x="690" y="218" text-anchor="middle" font-size="8" fill="#35e0ff">DOCKING RING</text>
+</g>
+<!-- arm -->
+<g id="arm" stroke-linejoin="miter">
+ <g id="s1"><rect id="s1r" x="0" y="-10" width="170" height="20" fill="#111" stroke="#fff" stroke-width="3"/><rect id="s1h" x="10" y="-4" width="150" height="8" fill="url(#hat)" stroke="none"/></g>
+ <g id="s2"><rect id="s2r" x="0" y="-8" width="170" height="16" fill="#111" stroke="#fff" stroke-width="3"/><rect id="s2h" x="10" y="-3" width="150" height="6" fill="url(#hat)" stroke="none"/></g>
+ <g id="s3"><rect id="s3r" x="0" y="-6" width="54" height="12" fill="#fff" stroke="#fff" stroke-width="2"/></g>
+ <circle id="j0" r="14" fill="#fff"/><circle id="j0i" r="5" fill="#000"/>
+ <circle id="j1" r="13" fill="#fff"/><circle id="j1i" r="5" fill="#000"/>
+ <circle id="j2" r="10" fill="#fff"/><circle id="j2i" r="4" fill="#000"/>
+ <g id="claw"><rect x="-8" y="-9" width="14" height="18" fill="#fff"/><polyline id="cl1" points="" fill="none" stroke="#fff" stroke-width="5"/><polyline id="cl2" points="" fill="none" stroke="#fff" stroke-width="5"/></g>
+</g>
+<!-- crate -->
+<g id="crate" class="cr">
+ <rect class="crb" x="-21" y="-21" width="42" height="42" fill="#000" stroke="#fff" stroke-width="3"/>
+ <path d="M-21 -21L21 21M21 -21L-21 21" stroke="#777" stroke-width="2"/>
+ <rect x="-8" y="-8" width="16" height="16" fill="#fff"/><rect x="-4" y="-4" width="8" height="8" fill="#000"/>
+ <text id="crl" class="cargo-lbl" x="0" y="-30" text-anchor="middle">CARGO</text>
+</g>
+<g id="fx"></g>
+</svg></div>
+<div class="hud"><div class="steps"><i id="st1" class="on">1 REACH</i><i id="st2">2 GRAB</i><i id="st3">3 DOCK</i></div><div class="msg" id="msg">Move the claw to the cargo crate.</div></div>
+<div class="ctl">
+ <div class="pad"><i></i><button class="b" data-k="up" aria-label="Up">▲</button><i></i><button class="b" data-k="left" aria-label="Left">◀</button><button class="b" data-k="down" aria-label="Down">▼</button><button class="b" data-k="right" aria-label="Right">▶</button></div>
+ <div class="acts"><button class="b cy" id="grab" disabled>GRAB</button><button class="b cy" id="dock" disabled>DOCK</button><button class="b" id="skip">SKIP</button></div>
+</div>
+</main>
+<section class="ov" id="intro"><div class="card">
+ <div class="eyebrow">HOW TO PLAY</div>
+ <h2>TRAIN WITH CANADARM2</h2>
+ <p>Move the arm to the cargo crate. Press GRAB. Guide it into the glowing docking ring, then press DOCK.</p>
+ <div class="how"><div><b>01</b>MOVE THE CLAW WITH THE ARROWS</div><div><b>02</b><span class="cyt">GRAB</span> THE FLOATING CRATE</div><div><b>03</b>CARRY IT TO THE RING AND <span class="cyt">DOCK</span></div></div>
+ <p style="color:#9a9a9a;font-size:8px">Do not touch the station with the arm.</p>
+ <button class="b cy" id="start">START MISSION →</button>
+</div></section>
+<section class="ov" id="end" hidden><div class="card">
+ <div class="eyebrow" id="eTag"></div><h2 id="eTitle"></h2><p id="eText"></p>
+ <div class="row"><button class="b" id="again">TRY AGAIN</button></div>
+</div></section>
+@@JS@@
+(function(){
+ var $=function(s){return document.querySelector(s);};
+ var B={x:330,y:284}, L1=170, L2=170, L3=54, RING={x:690,y:268};
+ var OBS=[[20,328,780,352],[250,288,410,352],[620,298,760,352],[40,100,200,330]];
+ var tr='M20 352'; for(var i=1;i<=38;i++){ tr+=' L'+(20+i*20)+' '+(i%2?328:352); } $('#truss').setAttribute('d',tr);
+ var keys={}, tip, vel, grab, docked, running=false, attempts=0, t=0, last=0, crate, over=false, canGrab=false, canDock=false;
+ window.MG3.holdButtons(keys);
+ function reset(){ tip={x:430,y:200}; vel={x:0,y:0}; grab=false; docked=false; crate={x:540,y:140}; over=false; $('#fx').innerHTML=''; setStep(1); msg('Move the claw to the cargo crate.'); $('#ring').classList.remove('ready'); }
+ var lastM=''; function msg(s,c){ var key=s+'|'+(c||''); if(key===lastM) return; lastM=key; var m=$('#msg'); m.textContent=s; m.className='msg'+(c?' '+c:''); }
+ function setStep(n){ ['1','2','3'].forEach(function(k){ var e=$('#st'+k); e.className=(+k<n?'ok':(+k===n?'on':'')); }); }
+ function inObs(x,y){ for(var i=0;i<OBS.length;i++){ var r=OBS[i]; if(x>r[0]&&x<r[2]&&y>r[1]&&y<r[3]) return true; } return false; }
+ function pose(){
+  var dx=tip.x-B.x, dy=tip.y-B.y, D=Math.hypot(dx,dy)||1, ux=dx/D, uy=dy/D;
+  var E={x:tip.x-ux*L3,y:tip.y-uy*L3}, ex=E.x-B.x, ey=E.y-B.y, d=Math.hypot(ex,ey)||1, dx2=ex/d, dy2=ey/d;
+  var a=d/2, h=Math.sqrt(Math.max(0,L1*L1-a*a));
+  var p1={x:B.x+dx2*a-dy2*h,y:B.y+dy2*a+dx2*h}, p2={x:B.x+dx2*a+dy2*h,y:B.y+dy2*a-dx2*h};
+  return {E:E,K:(p1.y<p2.y?p1:p2),ux:ux,uy:uy};
+ }
+ function seg(id,P,Q,len){ var ang=Math.atan2(Q.y-P.y,Q.x-P.x)*180/Math.PI; $(id).setAttribute('transform','translate('+P.x+' '+P.y+') rotate('+ang+')'); var r=$(id+'r'); r.setAttribute('width',len); var h=$(id+'h'); if(h){ h.setAttribute('width',Math.max(0,len-20)); } }
+ function put(id,P){ $(id).setAttribute('cx',P.x); $(id).setAttribute('cy',P.y); $(id+'i').setAttribute('cx',P.x); $(id+'i').setAttribute('cy',P.y); }
+ function render(){
+  var p=pose(), K=p.K, E=p.E;
+  seg('#s1',B,K,Math.hypot(K.x-B.x,K.y-B.y)); seg('#s2',K,E,Math.hypot(E.x-K.x,E.y-K.y)); seg('#s3',E,tip,L3);
+  put('#j0',B); put('#j1',K); put('#j2',E);
+  var ang=Math.atan2(p.uy,p.ux)*180/Math.PI; $('#claw').setAttribute('transform','translate('+tip.x+' '+tip.y+') rotate('+ang+')');
+  var o=grab?'-14,-6 8,-7 22,-2':'-14,-12 8,-16 24,-6', o2=grab?'-14,6 8,7 22,2':'-14,12 8,16 24,6';
+  $('#cl1').setAttribute('points',o); $('#cl2').setAttribute('points',o2);
+  var cx=crate.x, cy=crate.y, rot=grab?ang:Math.sin(t*.5)*14;
+  $('#crate').setAttribute('transform','translate('+cx+' '+cy+') rotate('+rot+')');
+  var lb=$('#crl'); lb.setAttribute('transform','rotate('+(-rot)+')');
+  $('#crate').classList.toggle('canGrab',canGrab);
+ }
+ function contact(){
+  var p=pose(), pts=[[tip.x,tip.y],[p.E.x,p.E.y]];
+  if(grab){ for(var sx=-1;sx<=1;sx+=2) for(var sy=-1;sy<=1;sy+=2) pts.push([crate.x+sx*21,crate.y+sy*21]); }
+  for(var i=0;i<pts.length;i++) if(inObs(pts[i][0],pts[i][1])) return true;
+  return false;
+ }
+ function step(now){
+  if(!last) last=now; var dt=Math.min(.05,(now-last)/1000); last=now; t+=dt;
+  if(running){
+   var ax=(keys.right?1:0)-(keys.left?1:0), ay=(keys.down?1:0)-(keys.up?1:0), n=Math.hypot(ax,ay)||1, sp=190;
+   var tx=(ax||ay)?ax/n*sp:0, ty=(ax||ay)?ay/n*sp:0, k=Math.min(1,dt*9);
+   vel.x+=(tx-vel.x)*k; vel.y+=(ty-vel.y)*k; tip.x+=vel.x*dt; tip.y+=vel.y*dt;
+   tip.x=Math.max(30,Math.min(770,tip.x)); tip.y=Math.max(30,Math.min(326,tip.y));
+   var dx=tip.x-B.x, dy=tip.y-B.y, d=Math.hypot(dx,dy); if(d>388){ tip.x=B.x+dx/d*388; tip.y=B.y+dy/d*388; } if(d<112){ tip.x=B.x+dx/d*112; tip.y=B.y+dy/d*112; }
+   var p=pose();
+   if(!grab&&!docked){ crate.x=540+Math.sin(t*.6)*34; crate.y=140+Math.sin(t*.9)*20; }
+   if(grab){ crate.x=tip.x+p.ux*24; crate.y=tip.y+p.uy*24; }
+   canGrab=!grab&&!docked&&Math.hypot(tip.x-crate.x,tip.y-crate.y)<36;
+   canDock=grab&&Math.hypot(crate.x-RING.x,crate.y-RING.y)<18;
+   $('#grab').disabled=!canGrab; $('#dock').disabled=!canDock; $('#ring').classList.toggle('ready',canDock);
+   if(!grab&&canGrab) msg('Crate in reach — press GRAB.','good');
+   else if(!grab) msg('Move the claw to the cargo crate.');
+   else if(canDock) msg('Crate is centered — press DOCK.','good');
+   else msg('Carry the crate into the glowing ring.');
+   if(contact()){ fail(); }
+  }
+  render(); requestAnimationFrame(step);
+ }
+ function fail(){
+  running=false; over=true; msg('ARM CONTACT DETECTED','err');
+  $('#eTag').textContent='TRAINING FAILED'; $('#eTitle').innerHTML='ARM<br>CONTACT'; $('#eText').textContent='ARM CONTACT DETECTED — RESET THE TRAINING RUN.';
+  window.MG3.report(false,false,false); $('#end').hidden=false; $('#again').focus();
+ }
+ function win(){
+  running=false; over=true; var fx=$('#fx'), s='';
+  for(var i=0;i<8;i++){ var a=i*Math.PI/4; s+='<line x1="'+(RING.x+Math.cos(a)*40)+'" y1="'+(RING.y+Math.sin(a)*40)+'" x2="'+(RING.x+Math.cos(a)*58)+'" y2="'+(RING.y+Math.sin(a)*58)+'"/>'; }
+  fx.innerHTML='<g class="burst">'+s+'</g>'; msg('CARGO SECURED','good');
+  var perfect=attempts===0;
+  setTimeout(function(){
+   $('#eTag').textContent=perfect?'MISSION COMPLETE · PERFECT':'MISSION COMPLETE'; $('#eTitle').innerHTML='CARGO<br>SECURED';
+   $('#eText').textContent=perfect?'Cargo docked on the first attempt without touching the station.':'Cargo docked in the ring. +40 points.';
+   window.MG3.report(true,perfect,false); $('#end').hidden=false; $('#again').focus();
+  },900);
+ }
+ function doGrab(){ if(!running||!canGrab) return; grab=true; canGrab=false; setStep(3); msg('Crate captured. Carry it into the ring.','good'); }
+ function doDock(){ if(!running||!canDock) return; docked=true; grab=false; crate.x=RING.x; crate.y=RING.y; canDock=false; $('#dock').disabled=true; $('#grab').disabled=true; $('#ring').classList.add('ready'); win(); }
+ $('#grab').onclick=function(){ doGrab(); }; $('#dock').onclick=function(){ doDock(); };
+ function skip(){ if(over||(!$('#intro').hidden&&false)) return; running=false; over=true; $('#eTag').textContent='MINI-GAME SKIPPED'; $('#eTitle').innerHTML='CONTINUE<br>MISSION'; $('#eText').textContent='The mission continues without a bonus.'; $('#end').hidden=false; $('#again').focus(); window.MG3.report(false,false,true); }
+ $('#skip').onclick=skip;
+ window.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){ e.preventDefault(); skip(); return; }
+  if(e.key===' '||e.key==='Enter'){ if(running&&!e.target.closest('button')){ e.preventDefault(); if(canGrab) doGrab(); else if(canDock) doDock(); } }
+ });
+ $('#start').onclick=function(){ $('#intro').hidden=true; reset(); running=true; window.MG3.start(); };
+ $('#again').onclick=function(){ $('#end').hidden=true; attempts++; reset(); running=true; window.MG3.start(); };
+ reset(); render(); requestAnimationFrame(step);
+})();
