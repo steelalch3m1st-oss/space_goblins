@@ -67,7 +67,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:
 .locs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .loc{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--deck);display:flex;flex-direction:column;text-align:left;padding:0;transition:transform .18s,border-color .18s}
 .loc:hover{transform:translateY(-3px);border-color:var(--lc)}
-.loc .art{aspect-ratio:300/170;max-width:100%;display:block;background:#000}
+.loc .art{max-width:100%;display:block;background:#000}
 .loc .art svg{display:block;width:100%;height:100%}
 .loc .bd{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
 .loc h2{font-size:26px;color:var(--lc)}
@@ -1650,8 +1650,8 @@ class Px{
  stamp(rows,x,y,k){k=k||1;const F=this.F;for(let j=0;j<rows.length;j++)for(let i=0;i<rows[j].length;i++){const ch=rows[j][i];if(ch==='.')continue;for(let b=0;b<k;b++)for(let a=0;a<k;a++)this.p(x*F+i*k+a,y*F+j*k+b,ch);}}
   speck(x,y,w,h,n,r,c){for(let i=0;i<n;i++)this.p((x+r()*w)*this.F,(y+r()*h)*this.F,c);}
  stars(n,r,maxy){for(let i=0;i<n;i++)this.p(r()*this.w,r()*(maxy||this.lh)*this.F,r()<.3?'o':'#');}
- svg(vw,vh,cls,label,extra){
-  return '<svg class="'+(cls||'')+'" viewBox="0 0 '+vw+' '+vh+'" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges" '+(label?'role="img" aria-label="'+label+'"':'aria-hidden="true"')+'><rect width="'+vw+'" height="'+vh+'" fill="#000"/>'+gridRects(this.g.map(r=>r.join('')),this.cell,0,0)+(extra||'')+'</svg>';
+ svg(vw,vh,cls,label,extra,par){
+  return '<svg class="'+(cls||'')+'" viewBox="0 0 '+vw+' '+vh+'" preserveAspectRatio="xMidYMid '+(par||'slice')+'" shape-rendering="crispEdges" '+(label?'role="img" aria-label="'+label+'"':'aria-hidden="true"')+'><rect width="'+vw+'" height="'+vh+'" fill="#000"/>'+gridRects(this.g.map(r=>r.join('')),this.cell,0,0)+(extra||'')+'</svg>';
  }
 }
 function scene(sc, ic, o){
@@ -1729,7 +1729,7 @@ function scene(sc, ic, o){
   P.rect(28,22,44,16,'k');P.frame(28,22,44,16,'#');P.frame(30,24,40,12,'m');
   extra+='<text class="svgt" x="150" y="117" text-anchor="middle" font-size="12" fill="#fff">ПРОВАЛ!</text>';
  }
- return P.svg(300,180,'',o.label||'',extra);
+ return P.svg(300,180,'',o.label||'',extra,o.par);
 }
 function faceSVG(loc){
  const F=2, P=new Px(128,66,5,F), cx=66, body=loc==='moon'?'o':'m';
@@ -2089,7 +2089,7 @@ function achShelf(){
 }
 
 function homeView(){
- const loc = L => '<button class="loc" style="--lc:var(--'+L.id+')" data-a="loc" data-v="'+L.id+'"><div class="art">'+scene(L.id==='iss'?'iss-in':L.sc, null, {seed:hash(L.id), suit:L.id!=='iss', ax:150, label:L.n})+'</div><h2 class="loctitle">'+esc(L.n)+'</h2></button>';
+ const loc = L => '<button class="loc" style="--lc:var(--'+L.id+')" data-a="loc" data-v="'+L.id+'"><div class="art">'+scene(L.id==='iss'?'iss-in':L.sc, null, {seed:hash(L.id), suit:L.id!=='iss', ax:150, label:L.n, par:'meet'})+'</div><h2 class="loctitle">'+esc(L.n)+'</h2></button>';
  return '<section class="hero"><h1>Сплануй день астронавта <span>так, щоб він не провалився.</span></h1></section>'+
  '<div class="mode" role="radiogroup" aria-label="Режим гри"><div class="seg"><button role="radio" aria-checked="'+S.hints+'" class="'+(S.hints?'on':'')+'" data-a="mode" data-v="1"><b>З підказками</b></button><button role="radio" aria-checked="'+(!S.hints)+'" class="'+(!S.hints?'on':'')+'" data-a="mode" data-v="0"><b>Без підказок</b></button></div></div>'+
  '<section class="locs">'+Object.values(LOCS).map(loc).join('')+'</section>'+
