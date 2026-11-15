@@ -116,6 +116,11 @@ A local HTTP server is recommended for reliable mini-game functionality.
 
 **Space Goblins** | 4 Team Members
 
+@poisonacid
+@marysyaishchenko-png
+@dan2812
+@steelalch3m1st-oss
+
 **NASA Space Apps Challenge Kyiv 2026**
 
 Challenge: *Junior Astronaut Mission Trainer*
