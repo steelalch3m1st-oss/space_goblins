@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1868,7 +1868,7 @@ function achMetrics(day, r, L){
 const achBadge = (a, on, isNew) => '<div class="ach'+(on?' on':'')+(isNew?' new':'')+'" title="'+esc(a.d)+'"><svg viewBox="-30 -30 60 60" aria-hidden="true" shape-rendering="crispEdges"><rect x="-27" y="-27" width="54" height="54" fill="#000" stroke="'+(on?'#fff':'#555')+'" stroke-width="3"/>'+iconSVG(a.ic,1,on?'#fff':'#555')+'</svg><span><b>'+esc(a.n)+'</b><small>'+esc(a.d)+'</small></span></div>';
 
 /* ================= Стан гри ================= */
-let LANG=store.get('kz-lang','uk');
+let LANG=store.get('kz-lang','en');
 const S = {view:'home', players:['Гравець'], hints:true};
 const $app = document.getElementById('app');
 const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
